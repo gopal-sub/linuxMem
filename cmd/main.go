@@ -18,6 +18,9 @@ func main() {
 	heapData[0] = 3
 	processID := os.Getpid()
 	fmt.Printf("PID: %d\n", processID) // Replace 0 with os.Getpid()
+	fmt.Printf("globalData pt: %p\n", &globalData[0]) // Replace 0 with os.Getpid()
+	fmt.Printf("localDate pt: %p\n", &localData[0]) // Replace 0 with os.Getpid()
+	fmt.Printf("heapData pt: %p\n", &heapData[0]) // Replace 0 with os.Getpid()
 
 	time.Sleep(5 * time.Minute)
 }
