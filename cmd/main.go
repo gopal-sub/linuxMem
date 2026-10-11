@@ -21,6 +21,15 @@ func main() {
 	fmt.Printf("globalData pt: %p\n", &globalData[0]) // Replace 0 with os.Getpid()
 	fmt.Printf("localDate pt: %p\n", &localData[0]) // Replace 0 with os.Getpid()
 	fmt.Printf("heapData pt: %p\n", &heapData[0]) // Replace 0 with os.Getpid()
+	
+	for i :=0; i < len(heapData); i += 4096{
+		heapData[i] = 12
+
+		time.Sleep(2 *time.Second)
+		fmt.Printf("touched byte: %d\n", i)
+	}
+
+
 
 	time.Sleep(5 * time.Minute)
 }
