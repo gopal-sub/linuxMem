@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-
+	"golang.org/x/sys/unix"
 	"time"
 )
 
@@ -13,11 +13,15 @@ func main() {
 	localData := [1024]byte{}
 	heapData := make([]byte, 10*1024*1024) //10 Mb
 
-	data, err := os.ReadFile("file.txt")
+	f, err := os.OpenFile("file.txt", os.O_RDWR, 0)
 	if err != nil{
-		fmt.Println(err)
+		panic("file could not open")
 	}
-	fmt.Print(string(data))
+	data, err := unix.Mmap(int(f.Fd()), 0, 4096, unix.PROT_READ|unix.PROT_WRITE, unix.MAP_SHARED)
+	if err != nil {
+		fmt.Println(err)
+	}	
+	fmt.Println(data)
 
 	globalData[0] = 1
 	localData[0] = 2
