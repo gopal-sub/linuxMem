@@ -1,10 +1,10 @@
-
 package main
 
 import (
 	"fmt"
-	"time"
 	"os"
+
+	"time"
 )
 
 var globalData [1024 * 1024]byte
@@ -12,6 +12,12 @@ var globalData [1024 * 1024]byte
 func main() {
 	localData := [1024]byte{}
 	heapData := make([]byte, 10*1024*1024) //10 Mb
+
+	data, err := os.ReadFile("file.txt")
+	if err != nil{
+		fmt.Println(err)
+	}
+	fmt.Print(string(data))
 
 	globalData[0] = 1
 	localData[0] = 2
